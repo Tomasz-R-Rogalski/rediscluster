@@ -7,8 +7,7 @@ pipeline {
         AWS_DEFAULT_REGION = "eu-central-1"
     }
     stages {
-        # Stage 1
-        stage("Create an EKS Cluster") {
+        stage("Stage 1 Create an EKS Cluster") {
             steps {
                 script {
                     dir('terraform') {
