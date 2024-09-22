@@ -11,7 +11,6 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        # Jenkins will run these commands for us
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
