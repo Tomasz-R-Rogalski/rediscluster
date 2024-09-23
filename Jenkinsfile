@@ -23,7 +23,7 @@ pipeline {
                     dir('redis') {
                         sh "aws eks update-kubeconfig --region eu-central-1 --name tomekcluster"
                         sh "kubectl apply -f redis-svc.yaml;kubectl apply -f redis-sts.yaml;kubectl apply -f test-pod.yaml;kubectl apply -k github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.35"
-                        sh "kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/');yes"
+                        sh "kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/');yes"
                         timeout(time: 10)
                         sh "terraform destroy -auto-approve"
                     }
