@@ -23,7 +23,9 @@ pipeline {
                     dir('redis') {
                         sh "aws eks update-kubeconfig --region eu-central-1 --name tomekcluster"
                         sh "kubectl apply -f redis-svc.yaml;kubectl apply -f redis-sts.yaml;kubectl apply -f test-pod.yaml;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.35\""
-                        timeout(time: 10)
+                        options {
+                            timeout(time: 1) 
+                        }
                         sh "terraform destroy -auto-approve"
                     }
                 }
