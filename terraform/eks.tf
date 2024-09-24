@@ -33,6 +33,7 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
+    iam_role_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
     amc-cluster-wg = {
       min_size     = 1
       max_size     = 2
@@ -40,7 +41,6 @@ module "eks" {
 
       instance_types = ["t3.large"]
       capacity_type  = "SPOT"
-   #   key_name      = aws_key_pair.generated_key.key_name
 
       tags = {
         ExtraTag = "helloworld"
@@ -50,20 +50,3 @@ module "eks" {
 
   tags = local.tags
 }
-
-#variable "key_name" {}
-
-#resource "tls_private_key" "example" {
-#  algorithm = "RSA"
-#  rsa_bits  = 4096
-#}
-
-#resource "aws_key_pair" "generated_key" {
-#  key_name   = var.key_name
-#  public_key = tls_private_key.example.public_key_openssh
-#}
-
-#output "private_key" {
-#  value     = tls_private_key.example.private_key_pem
-#  sensitive = true
-#}
