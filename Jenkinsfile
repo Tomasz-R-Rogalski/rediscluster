@@ -25,21 +25,21 @@ pipeline {
                         sh "kubectl apply -f redis-svc.yaml;kubectl apply -f redis-sts.yaml;kubectl apply -f test-pod.yaml"
                         sh "kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.35\""
                    //     sh "kubectl get pods -l app=redis-cluster -o jsonpath=\'{range.items[*]}{.status.podIP}\'"
-                    //    sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath=\'{range.items[*]}{.status.podIP}:6379 \' | sed \'s/6379 :6379/6379/\');yes"
+                        sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379\');yes"
                     //    sh "kubectl exec -it redis-cluster-0 -- redis-cli --cluster create --cluster-replicas 1 $(kubectl get pods -l app=redis-cluster -o jsonpath=\'{range.items[*]}{.status.podIP}:6379 \')"
-                        //sleep(time:30,unit:"SECONDS")
+                        sleep(time:1,unit:"MINUTES")
                     }
                 }
             }
         }
-//        stage("Stage 3 Destroy clusters") {
-  //          steps {
-    //            script {
-      //              dir('terraform') {
-        //                sh "terraform destroy -auto-approve"
-          //          }
-            //    }
-          // }
-        //}
+        stage("Stage 3 Destroy clusters") {
+            steps {
+                script {
+                    dir('terraform') {
+                        sh "terraform destroy -auto-approve"
+                    }
+                }
+           }
+        }
     }
 }
