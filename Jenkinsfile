@@ -32,14 +32,14 @@ pipeline {
                 }
             }
         }
-        stage("Stage 3 Destroy clusters") {
-            steps {
-                script {
-                    dir('terraform') {
-                        sh "terraform destroy -auto-approve"
-                    }
-                }
-           }
-        }
+//        stage("Stage 3 Destroy clusters") {
+  //          steps {
+    //            script {
+      //              dir('terraform') {
+        //                sh "terraform destroy -auto-approve"
+          //          }
+            //    }
+          // }
+        //}
     }
 }
