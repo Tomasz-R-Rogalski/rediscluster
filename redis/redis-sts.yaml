@@ -65,7 +65,7 @@ spec:
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: ebs-sc
-      persistentVolumeReclaimPolicy: Delete
+      reclaimPolicy: Delete
       resources:
         requests:
           storage: 1Gi
