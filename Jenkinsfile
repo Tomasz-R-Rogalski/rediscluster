@@ -33,6 +33,10 @@ pipeline {
         stage("Stage 3 Destroy clusters") {
             steps {
                 script {
+                    dir('redis') {
+                        sh "kubectl patch cluster redis-cluster -p '{\"spec\":{\"terminationPolicy\":\"WipeOut\"}}' --type=\"merge\""
+                        sh "kubectl delete cluster redis-cluster"
+                    }
                     dir('terraform') {
                         sh "terraform destroy -auto-approve"
                     }
