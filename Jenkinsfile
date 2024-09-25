@@ -41,7 +41,7 @@ pipeline {
                 }
            }
         }
-    }
+    
 @NonCPS 
 def deleteVolumes(list) {
     list.each { item ->
