@@ -41,11 +41,11 @@ pipeline {
                 }
            }
         }
-    
+
+}
 @NonCPS 
 def deleteVolumes(list) {
     list.each { item ->
         sh "aws ec2 delete-volume --volume-id ${item}"
     }
-}
 }
