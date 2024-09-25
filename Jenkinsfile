@@ -6,7 +6,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         AWS_DEFAULT_REGION = "eu-central-1"
     }
-//    stages {
+    stages {
   //      stage("Stage 1 Create an EKS Cluster") {
     //        steps {
       //          script {
@@ -41,7 +41,7 @@ pipeline {
                 }
            }
         }
-
+    }
 }
 @NonCPS 
 def deleteVolumes(list) {
