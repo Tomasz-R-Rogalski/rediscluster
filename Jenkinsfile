@@ -35,6 +35,7 @@ pipeline {
                 script {
                     dir('terraform') {
                      //   sh "terraform destroy -auto-approve"
+                        sh "aws ec2 describe-volumes | grep 'VolumeId' | sed -r 's/.*VolumeId\": \"([^\"]*)\",/\1,/' | tr -d '\n' | sed -r 's/([^\"]*)/[\1]/'"
                         list = "aws ec2 describe-volumes | grep 'VolumeId' | sed -r 's/.*VolumeId\": \"([^\"]*)\",/\1,/' | tr -d '\n' | sed -r 's/([^\"]*)/[\1]/'"
                         deleteVolumes(list)
                     }
