@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     dir('redis') {
-                        sh "kubectl patch cluster redis-cluster -p '{\"spec\":{\"terminationPolicy\":\"WipeOut\"}}' --type=\"merge\""
+                     //   sh "kubectl patch cluster redis-cluster -p '{\"spec\":{\"terminationPolicy\":\"WipeOut\"}}' --type=\"merge\""
                         sh "kubectl delete cluster redis-cluster"
                     }
                     dir('terraform') {
