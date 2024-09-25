@@ -59,13 +59,13 @@ spec:
         configMap:
           name: redis-cluster
           defaultMode: 0755
+          reclaimPolicy: Delete
   volumeClaimTemplates:
   - metadata:
       name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: ebs-sc
-      reclaimPolicy: Delete
       resources:
         requests:
           storage: 1Gi
