@@ -26,7 +26,7 @@ pipeline {
                         sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-yes --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/')"
                         sleep(time:30,unit:"SECONDS")
                         sh "SET mykey \"KluczNumeroUno\""
-                        return sh "GET mykey"
+                        sh "GET mykey"
                     }
                 }
             }
