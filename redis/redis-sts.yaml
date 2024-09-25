@@ -59,7 +59,6 @@ spec:
         configMap:
           name: redis-cluster
           defaultMode: 0755
-          reclaimPolicy: Delete
   volumeClaimTemplates:
   - metadata:
       name: data
