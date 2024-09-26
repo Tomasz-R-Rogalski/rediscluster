@@ -36,18 +36,9 @@ pipeline {
                     dir('terraform') {
                         sh "terraform destroy -auto-approve"
                         sh "for K in \$(aws ec2 --region eu-central-1 describe-volumes --query 'Volumes[*].VolumeId' --output=text); do aws ec2 delete-volume --volume-id \$K; done"
-                       // sh "aws ec2 describe-volumes | grep 'VolumeId' | sed -r 's/.*VolumeId\": \"([^\"]*)\",/\\1,/' | tr -d '\n' | sed -r 's/([^\"]*)/[\\1]/' | 'sed 's/,]/]/'"
-                      //  list = sh "aws ec2 describe-volumes | grep 'VolumeId' | sed -r 's/.*VolumeId\": \"([^\"]*)\",/\\1,/' | tr -d '\n' | sed -r 's/([^\"]*)/[\\1]/' | 'sed 's/,]/]/'"
-                  //      deleteVolumes(list)
                     }
                 }
            }
         }
     }
 }
-//@NonCPS 
-//def deleteVolumes(list) {
-  //  list.each { item ->
-    //    sh "aws ec2 delete-volume --volume-id ${item}"
-  //  }
-//}
