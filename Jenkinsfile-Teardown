@@ -1,0 +1,21 @@
+#!/usr/bin/env groovy
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION = "eu-central-1"
+    }
+    stages {
+        stage("Destroy clusters") {
+    	    steps {
+		script {
+	   	    dir('terraform') {
+			sh "terraform destroy -auto-approve"
+			sh "for K in \$(aws ec2 --region eu-central-1 describe-volumes --query 'Volumes[*].VolumeId' --output=text); do aws ec2 delete-volume --volume-id \$K; done"
+	    }
+	}
+   }
+}
+    }
+}
