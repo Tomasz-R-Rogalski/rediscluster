@@ -5,6 +5,10 @@ module "eks" {
   cluster_name                   = local.name
   cluster_endpoint_public_access = true
 
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${local.name}" = null
+  }
+
   cluster_addons = {
     coredns = {
       most_recent = true
