@@ -23,10 +23,10 @@ pipeline {
                 script {
                     dir('redis') {
                         sh "aws eks update-kubeconfig --region eu-central-1 --name tomekcluster"
-                        sh "kubectl apply -f redis-svc.yaml;kubectl apply -f redis-sts.yaml;kubectl apply -f test-pod.yaml;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.35\""
+                        sh "helm install redis-chart redis-chart;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.35\""
                         sleep(time:3,unit:"MINUTES")
                         sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-yes --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/')"
-                        sleep(time:60,unit:"MINUTES")
+                       // sleep(time:60,unit:"MINUTES")
                         //sh "kubectl exec -i redis-client -- redis-cli -h redis-cluster;SET mykey \"KluczNumeroUno\";GET mykey"
                     }
                 }
