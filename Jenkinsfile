@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        sh "kubectl delete svc redis-cluster-loadbalancer"
+                    //    sh "kubectl delete svc redis-cluster-loadbalancer"
                         sh "terraform destroy -auto-approve"
                         sh "for K in \$(aws ec2 --region eu-central-1 describe-volumes --query 'Volumes[*].VolumeId' --output=text); do aws ec2 delete-volume --volume-id \$K; done"
                     }
