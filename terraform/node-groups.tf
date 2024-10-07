@@ -10,7 +10,7 @@ resource "aws_iam_role" "node-group-role" {
         Service = "ec2.amazonaws.com"
       }
     }]
-    Version = "2024-10-06"
+    Version = "2012-10-17"
   })
 }
 
