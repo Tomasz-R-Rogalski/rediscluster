@@ -7,16 +7,16 @@ pipeline {
         AWS_DEFAULT_REGION = "eu-central-1"
     }
     stages {
-//        stage("Stage 1 Create an EKS Cluster") {
-  //          steps {
-    //            script {
-      //              dir('terraform') {
-        //                sh "terraform init"
-          //              sh "terraform apply -auto-approve"
-            //        }
-              //  }
-//            }
-  //      }
+        stage("Stage 1 Create an EKS Cluster") {
+            steps {
+                script {
+                    dir('terraform') {
+                        sh "terraform init"
+                        sh "terraform apply -auto-approve"
+                    }
+                }
+            }
+        }
     //    stage("Stage 2 Deploy Redis Cluster") {
       //      steps {
         //        script {
