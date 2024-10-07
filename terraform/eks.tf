@@ -42,6 +42,19 @@ resource "aws_eks_cluster" "redis-cluster" {
       aws_subnet.public-eu-central-1b.id
     ]
   }
-
+  cluster_addons = {
+    coredns = {
+      most_recent = true
+    }
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent = true
+    }
+    aws-ebs-csi-driver = {
+      most_recent = true
+    }
+  }
   depends_on = [aws_iam_role_policy_attachment.eks-cluster-policy-attachments]
 }
