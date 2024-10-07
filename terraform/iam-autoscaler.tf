@@ -38,7 +38,7 @@ resource "aws_iam_policy" "eks_cluster_autoscaler" {
       Effect   = "Allow"
       Resource = "*"
     }]
-    Version = "2024-10-06"
+    Version = "2012-10-17"
   })
 }
 
