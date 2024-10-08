@@ -12,3 +12,8 @@ resource "aws_eks_addon" "kubeproxy" {
   cluster_name = aws_eks_cluster.redis-cluster.name
   addon_name   = "kube-proxy"
 }
+
+resource "aws_eks_addon" "vpc-cni" {
+  cluster_name = aws_eks_cluster.redis-cluster.name
+  addon_name   = "vpc-cni"
+}
