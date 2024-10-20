@@ -61,9 +61,10 @@ spec:
           defaultMode: 0755
   volumeClaimTemplates:
   - metadata:
-      name: ebs-sc
+      name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
+      storageClassName: ebs-sc
       resources:
         requests:
           storage: 1Gi
@@ -73,7 +74,6 @@ kind: StorageClass
 metadata:
   name: ebs-sc
 provisioner: ebs.csi.aws.com
-reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: gp3
