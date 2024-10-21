@@ -19,6 +19,10 @@ resource "aws_iam_role_policy_attachment" "node-group-AmazonEKSWorkerNodePolicy"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.node-group-role.name
 }
+resource "aws_iam_role_policy_attachment" "node-group-AmazonEBSCSIDriverPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEBSCSIDriverPolicy"
+  role       = aws_iam_role.node-group-role.name
+
 
 resource "aws_iam_role_policy_attachment" "node-group-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
@@ -72,6 +76,7 @@ resource "aws_eks_node_group" "private-nodes" {
 
   depends_on = [
     aws_iam_role_policy_attachment.node-group-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.node-group-AmazonEBSCSIDriverPolicy,
     aws_iam_role_policy_attachment.node-group-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.node-group-AmazonEC2ContainerRegistryReadOnly,
   ]
