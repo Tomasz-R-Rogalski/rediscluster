@@ -19,10 +19,11 @@ resource "aws_iam_role_policy_attachment" "node-group-AmazonEKSWorkerNodePolicy"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.node-group-role.name
 }
+
 resource "aws_iam_role_policy_attachment" "node-group-AmazonEBSCSIDriverPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEBSCSIDriverPolicy"
   role       = aws_iam_role.node-group-role.name
-
+}
 
 resource "aws_iam_role_policy_attachment" "node-group-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
