@@ -88,13 +88,17 @@ resource "aws_eks_node_group" "private-nodes" {
    name = "eks-with-disks"
 
   # key_name = "local-provisioner"
-
-   block_device_mappings {
-     device_name = "/dev/xvdb"
-
-     ebs {
-       volume_size = 50
-       volume_type = "gp2"
-     }
+   metadata_options {
+     http_endpoint               = "enabled"
+     http_tokens                 = "required"
+     http_put_response_hop_limit = 1
    }
+#   block_device_mappings {
+ #    device_name = "/dev/xvdb"
+
+  #   ebs {
+   #    volume_size = 50
+    #   volume_type = "gp2"
+     #}
+#   }
  }
