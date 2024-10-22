@@ -22,9 +22,9 @@ pipeline {
                 script {
                     dir('redis') {
                         sh "aws eks update-kubeconfig --region eu-central-1 --name redis-cluster"
-                        sh "helm install my-aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver --version 2.36.0;helm install redis-chart redis-chart"
+                       // sh "helm install my-aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver --version 2.36.0;helm install redis-chart redis-chart"
                         //sh "helm upgrade --install aws-ebs-csi-driver --namespace kube-system aws-ebs-csi-driver/aws-ebs-csi-driver"
-                      //  sh "helm install redis-chart redis-chart;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36\""
+                        sh "helm install redis-chart redis-chart;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36\""
                         sleep(time:3,unit:"MINUTES")
                         //sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-yes --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/')"
                      //   sleep(time:20,unit:"MINUTES")
@@ -32,16 +32,16 @@ pipeline {
                 }
             }
         }
-//        stage("Stage 3 Destroy clusters") {
-  //          steps {
-    //            script {
-      //              dir('terraform') {
+        stage("Stage 3 Destroy clusters") {
+            steps {
+                script {
+                    dir('terraform') {
                     //    sh "kubectl delete svc redis-cluster-loadbalancer"
-        //                sh "terraform destroy -auto-approve"
-          //              sh "for K in \$(aws ec2 --region eu-central-1 describe-volumes --query 'Volumes[*].VolumeId' --output=text); do aws ec2 delete-volume --volume-id \$K; done"
-            //        }
-              //  }
- //          }
-   //     }
+                        sh "terraform destroy -auto-approve"
+                        sh "for K in \$(aws ec2 --region eu-central-1 describe-volumes --query 'Volumes[*].VolumeId' --output=text); do aws ec2 delete-volume --volume-id \$K; done"
+                    }
+                }
+           }
+        }
     }
 }
