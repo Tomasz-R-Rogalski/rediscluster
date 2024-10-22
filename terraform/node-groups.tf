@@ -25,11 +25,6 @@ resource "aws_iam_role_policy_attachment" "node-group-AmazonEBSCSIDriverPolicy" 
   role       = aws_iam_role.node-group-role.name
 }
 
-resource "aws_iam_role_policy_attachment" "node-group-AmazonEKS_CNI_Policy" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.node-group-role.name
-}
-
 resource "aws_iam_role_policy_attachment" "node-group-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.node-group-role.name
