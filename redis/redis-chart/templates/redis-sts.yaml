@@ -66,7 +66,7 @@ spec:
       name: redis-cluster
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: aws-ebs-k8
+      storageClassName: redis-cluster
       resources:
         requests:
           storage: 20Gi
@@ -78,7 +78,7 @@ metadata:
   labels:
   deploy: redis-cluster
 provisioner: kubernetes.io/aws-ebs
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: gp2
 allowVolumeExpansion: true
