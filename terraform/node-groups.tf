@@ -45,12 +45,7 @@ resource "aws_eks_node_group" "private-nodes" {
     aws_subnet.public-eu-central-1a.id,
     aws_subnet.public-eu-central-1b.id
   ]
-  metadata_options = {
-    http_endpoint               = "enabled"
-    http_tokens                 = "optional"
-    http_put_response_hop_limit = 2
-    instance_metadata_tags      = "enabled"
-  }
+
   capacity_type  = "ON_DEMAND"
   instance_types = ["t2.medium"]
 
@@ -74,10 +69,10 @@ resource "aws_eks_node_group" "private-nodes" {
   #   effect = "NO_SCHEDULE"
   # }
 
-  # launch_template {
-  #   name    = aws_launch_template.eks-with-disks.name
-  #   version = aws_launch_template.eks-with-disks.latest_version
-  # }
+   launch_template {
+     name    = aws_launch_template.eks-with-disks.name
+     version = aws_launch_template.eks-with-disks.latest_version
+   }
 
   depends_on = [
     aws_iam_role_policy_attachment.node-group-AmazonEKSWorkerNodePolicy,
@@ -89,17 +84,17 @@ resource "aws_eks_node_group" "private-nodes" {
 
 # launch template if required
 
-# resource "aws_launch_template" "eks-with-disks" {
-#   name = "eks-with-disks"
+ resource "aws_launch_template" "eks-with-disks" {
+   name = "eks-with-disks"
 
-#   key_name = "local-provisioner"
+   key_name = "local-provisioner"
 
-#   block_device_mappings {
-#     device_name = "/dev/xvdb"
+   block_device_mappings {
+     device_name = "/dev/xvdb"
 
-#     ebs {
-#       volume_size = 50
-#       volume_type = "gp2"
-#     }
-#   }
-# }
+     ebs {
+       volume_size = 50
+       volume_type = "gp2"
+     }
+   }
+ }
