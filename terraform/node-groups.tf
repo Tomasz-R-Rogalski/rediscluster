@@ -73,7 +73,6 @@ resource "aws_eks_node_group" "private-nodes" {
   depends_on = [
     aws_iam_role_policy_attachment.node-group-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.node-group-AmazonEBSCSIDriverPolicy,
-    aws_iam_role_policy_attachment.node-group-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.node-group-AmazonEC2ContainerRegistryReadOnly,
   ]
 }
