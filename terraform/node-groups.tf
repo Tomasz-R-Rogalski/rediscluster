@@ -45,7 +45,7 @@ resource "aws_eks_node_group" "private-nodes" {
     aws_subnet.public-eu-central-1a.id,
     aws_subnet.public-eu-central-1b.id
   ]
-  instance_metadata_options = {
+  metadata_options = {
     http_endpoint               = "enabled"
     http_tokens                 = "optional"
     http_put_response_hop_limit = 2
