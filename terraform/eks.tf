@@ -42,12 +42,6 @@ resource "aws_eks_cluster" "redis-cluster" {
       aws_subnet.public-eu-central-1b.id
     ]
   }
-  instance_metadata_options = {
-    http_endpoint               = "enabled"
-    http_tokens                 = "optional"
-    http_put_response_hop_limit = 2
-    instance_metadata_tags      = "enabled"
-  }
 
   depends_on = [aws_iam_role_policy_attachment.eks-cluster-policy-attachments]
 }
