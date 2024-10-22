@@ -61,12 +61,10 @@ spec:
           defaultMode: 0755
   volumeClaimTemplates:
   - metadata:
-      labels:
-      deploy: redis-cluster
-      name: redis-cluster
+      name: redis-cluster-volume
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: redis-cluster
+      storageClassName: redis-cluster-volume
       resources:
         requests:
           storage: 20Gi
@@ -74,10 +72,8 @@ spec:
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: redis-cluster
-  labels:
-  deploy: redis-cluster
-provisioner: kubernetes.io/aws-ebs
+  name: redis-cluster-volume
+provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: gp2
