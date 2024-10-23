@@ -25,9 +25,9 @@ pipeline {
                        // sh "helm install my-aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver --version 2.36.0;helm install redis-chart redis-chart"
                         //sh "helm upgrade --install aws-ebs-csi-driver --namespace kube-system aws-ebs-csi-driver/aws-ebs-csi-driver"
                         sh "helm install redis-chart redis-chart;kubectl apply -k \"github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36\""
-                        sleep(time:3,unit:"MINUTES")
+             //           sleep(time:3,unit:"MINUTES")
                         //sh "kubectl exec -i redis-cluster-0 -- redis-cli --cluster create --cluster-yes --cluster-replicas 1 \$(kubectl get pods -l app=redis-cluster -o jsonpath='{range.items[*]}{.status.podIP}:6379 ' | sed 's/6379 :6379/6379/')"
-                        sleep(time:20,unit:"MINUTES")
+               //         sleep(time:20,unit:"MINUTES")
                     }
                 }
             }
