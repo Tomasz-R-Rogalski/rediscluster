@@ -61,20 +61,20 @@ spec:
           defaultMode: 0755
   volumeClaimTemplates:
   - metadata:
+      name: data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: redis-cluster-volume
+      storageClassName: ebs-sc
       resources:
         requests:
-          storage: 20Gi
+          storage: 1Gi
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: redis-cluster-volume
+  name: ebs-sc
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  type: gp2
-allowVolumeExpansion: true
-reclaimPolicy: Retain
+  type: gp3
+  fsType: ext4
