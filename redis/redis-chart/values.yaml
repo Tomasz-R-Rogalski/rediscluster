@@ -3,5 +3,5 @@ replicaCount: 6
 service:
   name: redis-cluster-loadbalancer
   type: LoadBalancer
-  port: 8080
-  targetPort: 6379
+  port: 80
+  targetPort: 80
