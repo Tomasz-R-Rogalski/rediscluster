@@ -8,7 +8,6 @@ resource "aws_subnet" "private-eu-central-1a" {
   tags = {
     Name                              = "private-eu-central-1a"
     "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/role/elb"     = "1" #this instruct the kubernetes to create public load balancer in these subnets
     "kubernetes.io/cluster/demo"      = "owned"
   }
 }
@@ -21,7 +20,6 @@ resource "aws_subnet" "private-eu-central-1b" {
   tags = {
     Name                              = "private-eu-central-1b"
     "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/role/elb"     = "1" #this instruct the kubernetes to create public load balancer in these subnets
     "kubernetes.io/cluster/demo"      = "owned"
   }
 }
@@ -37,7 +35,6 @@ resource "aws_subnet" "public-eu-central-1a" {
   tags = {
     Name                         = "public-eu-central-1a"
     "kubernetes.io/role/elb"     = "1" #this instruct the kubernetes to create public load balancer in these subnets
-    "kubernetes.io/role/internal-elb" = "1"
     "kubernetes.io/cluster/demo" = "owned"
   }
 }
@@ -51,7 +48,6 @@ resource "aws_subnet" "public-eu-central-1b" {
   tags = {
     Name                         = "public-eu-central-1b"
     "kubernetes.io/role/elb"     = "1" #this instruct the kubernetes to create public load balancer in these subnets
-    "kubernetes.io/role/internal-elb" = "1"
     "kubernetes.io/cluster/demo" = "owned"
   }
 }
