@@ -4,7 +4,6 @@ metadata:
   name: {{ .Values.service.name }}
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: external
-    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
 spec:
   selector:
     app: redis-cluster
