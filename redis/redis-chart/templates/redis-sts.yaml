@@ -60,8 +60,6 @@ spec:
           name: redis-cluster
           defaultMode: 0755
   volumeClaimTemplates:
-  - metadata:
-      name: redis-cluster-volume
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: redis-cluster-volume
