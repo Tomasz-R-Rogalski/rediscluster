@@ -37,7 +37,7 @@ spec:
       - name: redis
         image: redis:7.4.0
         ports:
-        - containerPort: 6379
+        - containerPort: 80
           name: client
         - containerPort: 16379
           name: gossip
