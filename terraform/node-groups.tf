@@ -13,16 +13,16 @@ resource "aws_iam_role" "node-group-role" {
     Version = "2012-10-17"
   })
 
-  assume_role_policy = jsonencode({
-    Statement = [{
-      Action = "elasticloadbalancing:DescribeLoadBalancers"
-      Effect = "Allow"
-      Principal = {
-        Service = "ec2.amazonaws.com"
-      }
-    }]
-    Version = "2012-10-17"
-  })
+ # assume_role_policy = jsonencode({
+  #  Statement = [{
+   #   Action = "elasticloadbalancing:DescribeLoadBalancers"
+    #  Effect = "Allow"
+     # Principal = {
+      #  Service = "ec2.amazonaws.com"
+ #     }
+  #  }]
+   # Version = "2012-10-17"
+ # })
 
 }
 
@@ -75,12 +75,6 @@ resource "aws_eks_node_group" "private-nodes" {
     node = "kubenode"
   }
 
-  # taint {
-  #   key    = "team"
-  #   value  = "devops"
-  #   effect = "NO_SCHEDULE"
-  # }
-
    launch_template {
      name    = aws_launch_template.eks-with-disks.name
      version = aws_launch_template.eks-with-disks.latest_version
@@ -95,22 +89,12 @@ resource "aws_eks_node_group" "private-nodes" {
 }
 
 # launch template if required
-
  resource "aws_launch_template" "eks-with-disks" {
    name = "eks-with-disks"
 
-  # key_name = "local-provisioner"
    metadata_options {
      http_endpoint               = "enabled"
      http_tokens                 = "required"
      http_put_response_hop_limit = 2
    }
-#   block_device_mappings {
- #    device_name = "/dev/xvdb"
-
-  #   ebs {
-   #    volume_size = 50
-    #   volume_type = "gp2"
-     #}
-#   }
  }
