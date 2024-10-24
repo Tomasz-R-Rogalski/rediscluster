@@ -9,6 +9,11 @@ resource "aws_iam_role" "node-group-role" {
       Principal = {
         Service = "ec2.amazonaws.com"
       }
+    },
+    {
+      Action = "elasticloadbalancing:DescribeLoadBalancers"
+      Effect = "Allow"
+      Resource = "*"
     }]
     Version = "2012-10-17"
   })
