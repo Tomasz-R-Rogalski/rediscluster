@@ -9,14 +9,19 @@ resource "aws_iam_role" "node-group-role" {
       Principal = {
         Service = "ec2.amazonaws.com"
       }
-    },
-    {
+    }]
+    Version = "2012-10-17"
+  })
+
+  assume_role_policy = jsonencode({
+    Statement = [{
       Action = "elasticloadbalancing:DescribeLoadBalancers"
       Effect = "Allow"
       Resource = "*"
     }]
     Version = "2012-10-17"
   })
+
 }
 
 # IAM policy attachment to nodegroup
