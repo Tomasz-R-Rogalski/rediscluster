@@ -3,6 +3,7 @@ resource "aws_iam_role" "node-group-role" {
   name = "node-group-role"
 
   assume_role_policy = jsonencode({
+    Version = "2012-10-17",
     Statement = [{
       Action = "sts:AssumeRole"
       Effect = "Allow"
@@ -10,23 +11,35 @@ resource "aws_iam_role" "node-group-role" {
         Service = "ec2.amazonaws.com"
       }
     }]
-    Version = "2012-10-17"
+
   })
+}
 
- # assume_role_policy = jsonencode({
-  #  Statement = [{
-   #   Action = "elasticloadbalancing:DescribeLoadBalancers"
-    #  Effect = "Allow"
-     # Principal = {
-      #  Service = "ec2.amazonaws.com"
- #     }
-  #  }]
-   # Version = "2012-10-17"
- # })
+resource "aws_iam_policy" "lbpolicy" {
+  name        = "lbpolicy"
+  path        = "/"
+  description = "Load balancer node group policy"
 
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "elasticloadbalancing:DescribeLoadBalancers",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
 
 # IAM policy attachment to nodegroup
+resource "aws_iam_role_policy_attachment" "node-group-LoadBalancerPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/lbpolicy"
+  role       = aws_iam_role.node-group-role.name
+}
+
 resource "aws_iam_role_policy_attachment" "node-group-AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.node-group-role.name
@@ -88,7 +101,7 @@ resource "aws_eks_node_group" "private-nodes" {
   ]
 }
 
-# launch template if required
+# Launch template overriding response hop limit to 2
  resource "aws_launch_template" "eks-with-disks" {
    name = "eks-with-disks"
 
