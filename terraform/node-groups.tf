@@ -25,7 +25,7 @@ resource "aws_iam_policy" "lbpolicy" {
     Statement = [
       {
         Action = [
-          "elasticloadbalancing:DescribeLoadBalancers",
+          "elasticloadbalancing:DescribeLoadBalancers"
         ]
         Effect   = "Allow"
         Resource = "*"
