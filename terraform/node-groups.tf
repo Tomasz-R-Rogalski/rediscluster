@@ -36,7 +36,7 @@ resource "aws_iam_policy" "lbpolicy" {
 
 # IAM policy attachment to nodegroup
 resource "aws_iam_role_policy_attachment" "node-group-LoadBalancerPolicy" {
-  policy_arn = "arn:aws:iam::aws:policy/lbpolicy"
+  policy_arn = aws_iam_policy.lbpolicy.arn
   role       = aws_iam_role.node-group-role.name
 }
 
