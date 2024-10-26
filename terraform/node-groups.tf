@@ -42,7 +42,8 @@ resource "aws_iam_policy" "lbpolicy" {
           "elasticloadbalancing:DescribeLoadBalancerAttributes",
           "elasticloadbalancing:DescribeListeners",
           "elasticloadbalancing:CreateListener",
-          "elasticloadbalancing:DeleteListener"
+          "elasticloadbalancing:DeleteListener",
+          "elasticloadbalancing:DescribeListenerAttributes"
         ]
         Effect   = "Allow"
         Resource = "*"
