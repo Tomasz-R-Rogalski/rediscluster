@@ -29,7 +29,8 @@ resource "aws_iam_policy" "lbpolicy" {
           "ec2:CreateSecurityGroup",
           "ec2:CreateTags",
           "ec2:AuthorizeSecurityGroupIngress",
-          "elasticloadbalancing:DescribeTargetGroups"
+          "elasticloadbalancing:DescribeTargetGroups",
+          "elasticloadbalancing:CreateTargetGroup"
         ]
         Effect   = "Allow"
         Resource = "*"
