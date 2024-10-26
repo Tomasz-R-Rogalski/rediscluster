@@ -35,7 +35,10 @@ resource "aws_iam_policy" "lbpolicy" {
           "elasticloadbalancing:AddTags",
           "elasticloadbalancing:DescribeTags",
           "elasticloadbalancing:DescribeTargetGroupAttributes",
-          "elasticloadbalancing:DeleteTargetGroup"
+          "elasticloadbalancing:DeleteTargetGroup",
+          "elasticloadbalancing:CreateLoadBalancer",
+          "elasticloadbalancing:DeleteLoadBalancer",
+          "elasticloadbalancing:DeleteTags"
         ]
         Effect   = "Allow"
         Resource = "*"
