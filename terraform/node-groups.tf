@@ -33,7 +33,8 @@ resource "aws_iam_policy" "lbpolicy" {
           "elasticloadbalancing:CreateTargetGroup",
           "ec2:DeleteSecurityGroup",
           "elasticloadbalancing:AddTags",
-          "elasticloadbalancing:DescribeTags"
+          "elasticloadbalancing:DescribeTags",
+          "elasticloadbalancing:DescribeTargetGroupAttributes"
         ]
         Effect   = "Allow"
         Resource = "*"
