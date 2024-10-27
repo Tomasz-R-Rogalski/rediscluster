@@ -3,13 +3,15 @@ apiVersion: v1
 kind: Service
 metadata:
   name: statefulset-service
+  labels:
+    name: statefulset-service
 spec:
   selector:
     app: redis-cluster
+  clusterIP: None
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+    - port: 80
+
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
