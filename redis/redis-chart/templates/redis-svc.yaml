@@ -29,6 +29,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: statefulset-service
+                name: redis-cluster
                 port:
                   number: 80
