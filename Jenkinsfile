@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-        stage("Stage 3 Destroy clusters") {
+        stage("Stage 3 Destroy Cluster") {
             steps {
                 script {
                     dir('terraform') {
